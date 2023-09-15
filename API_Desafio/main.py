@@ -46,7 +46,7 @@ async def post_dog(new_dog: Dog):
 @app.put('/dogs/update/{dog_id}')
 async def put_dog(dog_id: int, dog: Dog):
     if dog_id in dogs:
-        del dog.id
+        del dog.idtea
         dogs[dog_id] = dog
         return dogs
     else:
@@ -60,9 +60,14 @@ async def delete_dog(dog_id: int):
     else:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='Esta raça não existe')
   
-        
+@app.get("/placa-car")
+async def get_placa():
+    url = "http://10.234.82.58:8000/"
+    request = requests.get(url)
+    return request.json()
+
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run("main:app", host='127.0.0.1', port=8000, log_level="info", reload=True)
+    uvicorn.run("main:app", host='0.0.0.0', port=8000, log_level="info", reload=True)
     
