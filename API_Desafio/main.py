@@ -46,7 +46,7 @@ async def post_dog(new_dog: Dog):
 @app.put('/dogs/update/{dog_id}')
 async def put_dog(dog_id: int, dog: Dog):
     if dog_id in dogs:
-        del dog.idtea
+        del dog.id
         dogs[dog_id] = dog
         return dogs
     else:
