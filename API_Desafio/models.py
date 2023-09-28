@@ -1,11 +1,14 @@
-from pydantic import BaseModel
-from typing import Optional
+from database import Base
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Table, Time
 
 
-class Dog(BaseModel):
-    id: Optional[int] = None
-    raca: str
-    tempo_vida: str
-    descricao: str 
-    foto: str
+
+class Dogs(Base):
+    __tablename__ = "dogs"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    raca = Column(String)
+    tempo_vida = Column(String)
+    descricao = Column(String)
+    foto = Column(String)
     
