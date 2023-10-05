@@ -7,3 +7,9 @@ class Dog(BaseModel):
     tempo_vida: str
     descricao: str 
     foto: str
+
+class UserCreate(BaseModel):
+    email: str
+    name: str
+    password: str
+    admin: bool
