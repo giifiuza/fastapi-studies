@@ -11,6 +11,12 @@ from core.deps import get_session
 
 router = APIRouter()
 
+@router.get('/external', status_code=status.HTTP_200_OK, tags=["Consumindo"])
+async def get_api():
+  request = requests.get(f"https://api.thedogapi.com/v1/breeds/")
+  print(request)
+  return request.json()
+
 @router.get('/', response_model=List[DogSchema])
 async def get_cachorros(db: AsyncSession = Depends(get_session)):
   async with db as session:
@@ -69,8 +75,3 @@ async def delete_cachorro(dog_id: int, db: AsyncSession = Depends(get_session)):
     else:
       raise(HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Cachorro não encontrado!'))
   
-@router.get('/', status_code=status.HTTP_404_NOT_FOUND, tags=["Consumindo"])
-async def get_api():
-  request = requests.get(f"https://api.thedogapi.com/v1/breeds/")
-  print(request)
-  return request.json()
